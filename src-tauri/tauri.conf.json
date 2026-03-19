@@ -1,0 +1,17 @@
+{
+  "build": {
+    "beforeDevCommand": "npm run dev",
+    "beforeBuildCommand": "npm run build",
+    "devPath": "http://localhost:5174",
+    "distDir": "../dist"
+  },
+  "tauri": {
+    "windows": [
+      {
+        "title": "Caiyun IPA",
+        "width": 1200,
+        "height": 800
+      }
+    ]
+  }
+}

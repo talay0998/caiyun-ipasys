@@ -143,6 +143,7 @@
           <button class="settings-tab-button" :class="{ active: settingsTab === 'basic' }" @click="settingsTab = 'basic'">基本信息</button>
           <button class="settings-tab-button" :class="{ active: settingsTab === 'params' }" @click="settingsTab = 'params'">参数配置</button>
           <button class="settings-tab-button" :class="{ active: settingsTab === 'email' }" @click="settingsTab = 'email'">邮件服务器</button>
+          <button class="settings-tab-button" :class="{ active: settingsTab === 'api' }" @click="settingsTab = 'api'">API设置</button>
         </div>
         
         <!-- 基本信息设置 -->
@@ -221,6 +222,40 @@
             <div class="form-item">
               <label for="smtpFrom">发件人邮箱</label>
               <input type="email" id="smtpFrom" v-model="settingsData.smtpFrom" placeholder="请输入发件人邮箱" />
+            </div>
+            <div class="form-actions">
+              <button type="submit" class="submit-button">保存设置</button>
+            </div>
+          </form>
+        </div>
+        
+        <!-- API设置 -->
+        <div class="settings-panel" v-if="settingsTab === 'api'">
+          <form @submit.prevent="submitApiSettings">
+            <div class="form-item">
+              <label>
+                <input type="checkbox" v-model="settingsData.apiEnabled" />
+                启用API接口
+              </label>
+            </div>
+            <div class="form-item" v-if="settingsData.apiEnabled">
+              <label for="apiKey">API密钥</label>
+              <div style="display: flex; gap: 8px; align-items: center;">
+                <input type="text" id="apiKey" v-model="settingsData.apiKey" placeholder="API密钥" readonly />
+                <button type="button" class="add-button" style="padding: 4px 12px; font-size: 12px;" @click="generateApiKey">生成密钥</button>
+              </div>
+            </div>
+            <div class="form-item" v-if="settingsData.apiEnabled">
+              <label for="apiIpWhitelist">IP白名单（多个IP用逗号分隔）</label>
+              <input type="text" id="apiIpWhitelist" v-model="settingsData.apiIpWhitelist" placeholder="例如：127.0.0.1,192.168.1.1" />
+            </div>
+            <div class="form-item" v-if="settingsData.apiEnabled">
+              <label for="apiRateLimit">请求频率限制（次/分钟）</label>
+              <input type="number" id="apiRateLimit" v-model.number="settingsData.apiRateLimit" min="1" max="1000" />
+            </div>
+            <div class="form-item" v-if="settingsData.apiEnabled">
+              <label for="apiAllowedOrigins">允许的跨域来源（多个用逗号分隔）</label>
+              <input type="text" id="apiAllowedOrigins" v-model="settingsData.apiAllowedOrigins" placeholder="例如：http://localhost:3000,https://example.com" />
             </div>
             <div class="form-actions">
               <button type="submit" class="submit-button">保存设置</button>
@@ -474,7 +509,13 @@ const settingsData = ref({
   smtpPort: 587,
   smtpUsername: 'admin@example.com',
   smtpPassword: '',
-  smtpFrom: 'admin@example.com'
+  smtpFrom: 'admin@example.com',
+  // API设置
+  apiEnabled: false,
+  apiKey: '',
+  apiIpWhitelist: '127.0.0.1',
+  apiRateLimit: 60,
+  apiAllowedOrigins: 'http://localhost:3000'
 })
 
 // 数据备份状态
@@ -740,6 +781,23 @@ const submitParamsSettings = () => {
 // 保存邮件服务器设置
 const submitEmailSettings = () => {
   showMessage('邮件服务器设置保存成功')
+}
+
+// 生成API密钥
+const generateApiKey = () => {
+  // 生成32位随机API密钥
+  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+  let apiKey = ''
+  for (let i = 0; i < 32; i++) {
+    apiKey += chars.charAt(Math.floor(Math.random() * chars.length))
+  }
+  settingsData.value.apiKey = apiKey
+  showMessage('API密钥生成成功')
+}
+
+// 保存API设置
+const submitApiSettings = () => {
+  showMessage('API设置保存成功')
 }
 
 // 打开恢复数据对话框

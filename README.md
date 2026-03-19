@@ -44,8 +44,8 @@
 
 1. **克隆仓库**
    ```bash
-   git clone https://github.com/yourusername/caiyun-ipa.git
-   cd caiyun-ipa
+   git clone https://github.com/talay0998/caiyun-ipasys.git
+   cd caiyun-ipasys
    ```
 
 2. **安装依赖**
@@ -67,7 +67,7 @@
 ## 项目结构
 
 ```
-caiyun-ipa/
+caiyun-ipasys/
 ├── src/                 # 前端源代码
 │   ├── router/          # 路由配置
 │   ├── views/           # 页面组件
@@ -90,7 +90,10 @@ caiyun-ipa/
 ├── package.json         # 项目配置
 ├── tsconfig.json        # TypeScript 配置
 ├── vite.config.ts       # Vite 配置
-└── README.md            # 项目说明
+├── README.md            # 项目说明
+├── 测试计划书.md         # 测试计划
+├── 测试报告.md           # 测试报告
+└── 开发问题与解决方案.md   # 开发问题与解决方案
 ```
 
 ## 核心功能模块
@@ -170,12 +173,16 @@ caiyun-ipa/
 
 本项目采用 MIT 许可证。详见 [LICENSE](LICENSE) 文件。
 
-## 联系方式
+## 开发团队
 
-- 项目维护者：[Your Name]
-- 邮箱：[your.email@example.com]
-- GitHub：[https://github.com/yourusername](https://github.com/yourusername)
+- 开发团队：喀什财运商标代理有限责任公司
+- 项目负责人：阿力木江
+- 官网：[talay.ltd](https://talay.ltd)
+- 邮箱：[work@talay.work](mailto:work@talay.work)
+
+## 项目说明
+
+- 项目完全开源免费
+- 需求：保留开发信息，免版权
 
 ---
-
-**注意**：本系统仅供内部使用，请勿用于商业用途。

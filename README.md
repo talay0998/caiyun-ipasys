@@ -154,14 +154,14 @@ caiyun-ipasys/
 - 数据备份与恢复
 - 日志管理
 
-## OpenClaw自动化接口
+## 自动化办公集成
 
 ### 1. 接口概述
-OpenClaw自动化接口是一个为系统提供自动化办公能力的集成接口，通过OpenClaw平台可以实现系统的自动化操作，提高工作效率。
+系统支持多种自动化办公平台集成，包括OpenClaw、腾讯WorkBuddy、阿里JVS Claw、飞书API等，通过这些平台可以实现系统的自动化操作，提高工作效率。
 
 ### 2. 配置步骤
 
-#### 2.1 安装OpenClaw
+#### 2.1 OpenClaw配置
 1. **下载OpenClaw**
    - 访问 [OpenClaw官网](https://openclaw.com) 下载最新版本
    - 按照安装向导完成安装
@@ -174,7 +174,57 @@ OpenClaw自动化接口是一个为系统提供自动化办公能力的集成接
      - URL：系统访问地址
      - 认证方式：选择适合的认证方式
 
-#### 2.2 配置系统API
+#### 2.2 腾讯WorkBuddy配置
+1. **登录WorkBuddy**
+   - 访问 [腾讯WorkBuddy](https://workbuddy.qq.com)
+   - 使用企业微信账号登录
+
+2. **创建自动化流程**
+   - 进入「自动化」→「创建流程」
+   - 选择「Webhook触发」或「定时触发」
+   - 配置触发条件和执行步骤
+
+3. **配置系统API**
+   - 在流程中添加「HTTP请求」步骤
+   - 填写系统API地址：`https://your-domain.com/api/xxx`
+   - 设置请求方法和参数
+   - 添加认证信息（API密钥）
+
+#### 2.3 阿里JVS Claw配置
+1. **登录JVS Claw**
+   - 访问 [阿里JVS Claw](https://jvs.aliyun.com/claw)
+   - 使用阿里云账号登录
+
+2. **创建机器人**
+   - 进入「机器人管理」→「创建机器人」
+   - 填写机器人名称和描述
+   - 选择「Webhook」类型
+
+3. **配置Webhook**
+   - 设置Webhook地址：`https://your-domain.com/api/webhook`
+   - 配置请求参数和认证方式
+   - 测试连接并保存
+
+#### 2.4 飞书API配置
+1. **登录飞书开发者平台**
+   - 访问 [飞书开发者平台](https://open.feishu.cn)
+   - 注册并创建企业应用
+
+2. **配置应用权限**
+   - 在「权限管理」中申请相关API权限
+   - 配置应用回调地址：`https://your-domain.com/api/feishu/callback`
+
+3. **创建自动化流程**
+   - 进入「自动化」→「创建流程」
+   - 选择触发事件和执行动作
+   - 添加系统API调用步骤
+
+4. **配置API认证**
+   - 在流程中添加认证信息
+   - 填写系统API密钥
+   - 测试连接并启用流程
+
+#### 2.5 配置系统API
 1. **启用API接口**
    - 登录系统管理后台
    - 进入「系统设置」→「API设置」

@@ -226,6 +226,75 @@ const apiRoutes = [
         data: report
       })
     }
+  },
+  
+  // Webhook接口
+  {
+    path: '/api/webhook',
+    method: 'POST',
+    handler: (req: any, res: any) => {
+      const { platform, event, data } = req.body
+      
+      // 根据不同平台处理webhook
+      switch (platform) {
+        case 'workbuddy':
+          // 腾讯WorkBuddy处理
+          console.log('WorkBuddy webhook:', event, data)
+          break
+        case 'jvsclaw':
+          // 阿里JVS Claw处理
+          console.log('JVS Claw webhook:', event, data)
+          break
+        case 'feishu':
+          // 飞书处理
+          console.log('Feishu webhook:', event, data)
+          break
+        default:
+          console.log('Unknown platform:', platform)
+      }
+      
+      return res.json({
+        success: true,
+        message: 'Webhook received'
+      })
+    }
+  },
+  
+  // 飞书回调接口
+  {
+    path: '/api/feishu/callback',
+    method: 'POST',
+    handler: (req: any, res: any) => {
+      const { challenge, event } = req.body
+      
+      // 飞书验证回调
+      if (challenge) {
+        return res.json({ challenge })
+      }
+      
+      // 处理飞书事件
+      if (event) {
+        console.log('Feishu event:', event)
+        // 处理具体事件逻辑
+      }
+      
+      return res.json({
+        success: true
+      })
+    }
+  },
+  
+  // 健康检查接口
+  {
+    path: '/api/health',
+    method: 'GET',
+    handler: (req: any, res: any) => {
+      return res.json({
+        success: true,
+        status: 'healthy',
+        timestamp: new Date().toISOString()
+      })
+    }
   }
 ]
 
